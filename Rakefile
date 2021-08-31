@@ -1,18 +1,15 @@
-require "bundler/setup"
+require 'rubygems'
+require 'bundler/setup'
+require 'bundler/gem_tasks'
+require 'rspec/core/rake_task'
 
-APP_RAKEFILE = File.expand_path("test/dummy/Rakefile", __dir__)
-load "rails/tasks/engine.rake"
+RSpec::Core::RakeTask.new(:spec)
 
-load "rails/tasks/statistics.rake"
-
-require "bundler/gem_tasks"
-
-require "rake/testtask"
-
-Rake::TestTask.new(:test) do |t|
-  t.libs << 'test'
-  t.pattern = 'test/**/*_test.rb'
-  t.verbose = false
+if ENV['CI']
+  task default: :spec
+else
+  require 'appraisal'
+  task :default do
+    system('bundle exec rake appraisal spec')
+  end
 end
-
-task default: :test
