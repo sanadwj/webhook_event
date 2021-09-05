@@ -17,9 +17,9 @@ Gem::Specification.new do |spec|
   spec.files       = `git ls-files`.split("\n")
   spec.test_files  = `git ls-files -- Appraisals {spec,gemfiles}/*`.split("\n")
 
-  spec.add_dependency "rails", "~> 6.1.4"
+  spec.add_dependency "rails", "~> 5.1"
 
-  spec.add_dependency "activesupport", ">= 3.1"
+  spec.add_dependency "activesupport", ">= 2.4"
 
   spec.add_development_dependency "appraisal"
   spec.add_development_dependency "coveralls"
